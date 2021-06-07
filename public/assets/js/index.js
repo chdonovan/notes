@@ -27,21 +27,21 @@ const hide = (elem) => {
 let activeNote = {};
 
 const getNotes = () =>
-  fetch('/api/notes', {
+  fetch(`/api/notes`  , {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+});
 
-  const saveNote = (note) =>
+const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  });
+});
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -49,9 +49,9 @@ const deleteNote = (id) =>
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+});
 
-  const renderActiveNote = () => {
+const renderActiveNote = () => {
     hide(saveNoteBtn);
   
     if (activeNote.id) {
@@ -66,9 +66,9 @@ const deleteNote = (id) =>
       noteText.value = '';
       noteId.value = '';
     }
-  };
+};
 
-  const handleNoteSave = () => {
+const handleNoteSave = () => {
     const newNote = {
       title: noteTitle.value,
       text: noteText.value,
@@ -79,7 +79,7 @@ const deleteNote = (id) =>
       getAndRenderNotes();
       renderActiveNote();
     });
-  };
+};
 // Delete the clicked note
 const handleNoteDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
@@ -124,12 +124,12 @@ const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
-  }
+}
 
-  let noteListItems = [];
+let noteListItems = [];
 
-  // Returns HTML element with or without a delete button
-  const createLi = (text, delBtn = true) => {
+// Returns HTML element with or without a delete button
+const createLi = (text, delBtn = true) => {
     const liEl = document.createElement('li');
     liEl.classList.add('list-group-item');
 
